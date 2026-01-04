@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Saidur Rahaman - The Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.8;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6B46C1;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+        }
+
+        /* Cursor Trail */
+        .trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #6B46C1;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            animation: trailFade 0.5s ease forwards;
+        }
+
+        @keyframes trailFade {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating Shapes */
+        .floating-shape {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .shape1 { top: 10%; left: 10%; width: 100px; height: 100px; background: #6B46C1; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 20s infinite; }
+        .shape2 { top: 60%; right: 15%; width: 150px; height: 150px; background: #00D9FF; border-radius: 50%; animation: float 25s infinite reverse; }
+        .shape3 { bottom: 10%; left: 20%; width: 80px; height: 80px; background: #FF6B9D; border-radius: 20% 80% 80% 20% / 80% 20% 20% 80%; animation: float 30s infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(0, -100px) rotate(180deg); }
+            75% { transform: translate(-50px, -50px) rotate(270deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #6B46C1, #00D9FF, #FF6B9D) 1;
+            box-shadow: 0 10px 40px rgba(107, 70, 193, 0.3);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6B46C1 0%, #00D9FF 50%, #FF6B9D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            animation: logoGlow 3s ease infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(107, 70, 193, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
+
+      .nav-links a, .theme-toggle {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85em; /* ১ এর বদলে ০.৮৫ দিলে লেখা ছোট হবে */
+    font-weight: 500;
+    padding: 8px 15px; /* প্যাডিং কমিয়ে বাটনগুলোও ছোট করা হয়েছে */
+    border-radius: 30px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            border-color: #00D9FF;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
+        }
+
+        .- {
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+            animation: Pulse 2s infinite;
+        }
+
+        @keyframes Pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.5); transform: scale(1); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 157, 1); transform: scale(1.05); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 150px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Profile Card */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 40px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF, #FF6B9D) border-box;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes profileRotate {
+            0% { filter: hue-rotate(0deg) drop-shadow(0 0 30px rgba(107, 70, 193, 0.8)); }
+            50% { filter: hue-rotate(180deg) drop-shadow(0 0 50px rgba(0, 217, 255, 0.8)); }
+            100% { filter: hue-rotate(360deg) drop-shadow(0 0 30px rgba(107, 70, 193, 0.8)); }
+        }
+
+        .profile-img:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        /* Orbiting Particles around Profile */
+        .orbit-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            animation: orbit 8s linear infinite;
+        }
+
+        .orbit-particle:nth-child(2) { animation-delay: -2s; }
+        .orbit-particle:nth-child(3) { animation-delay: -4s; }
+        .orbit-particle:nth-child(4) { animation-delay: -6s; }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #6B46C1 0%, #00D9FF 50%, #FF6B9D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlitch 5s ease infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes titleGlitch {
+            0%, 90%, 100% { text-shadow: none; }
+            92% { text-shadow: 3px 0 #6B46C1, -3px 0 #00D9FF; }
+            94% { text-shadow: -3px 0 #6B46C1, 3px 0 #00D9FF; }
+        }
+
+        .typing-container {
+            height: 80px;
+            margin: 30px 0;
+        }
+
+        .typing-text {
+            font-size: 2em;
+            color: #00D9FF;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Dream Tag */
+        .dream-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: 800;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6);
+            animation: dreamFloat 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dream-tag::before {
+            content: '⭐';
+            position: absolute;
+            font-size: 2em;
+            animation: starMove 2s linear infinite;
+        }
+
+        @keyframes starMove {
+            0% { left: -50px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 110%; opacity: 0; }
+        }
+
+        @keyframes dreamFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .tagline {
+            font-size: 1.6em;
+            font-style: italic;
+            color: #ffffff;
+            margin: 30px auto;
+            padding: 25px 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 2px solid rgba(107, 70, 193, 0.3);
+            display: inline-b;
+            box-shadow: 0 0 40px rgba(107, 70, 193, 0.4);
+        }
+
+        /* Magnetic Buttons */
+        .cta-buttons {
+            margin-top: 50px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #6B46C1 0%, #00D9FF 100%);
+            color: #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-decoration: none;
+            display: inline-b;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(107, 70, 193, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .cta-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.7);
+            border-color: #ffffff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 30px;
+        }
+
+        /* Section Title with Animation */
+        .section-title {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(135deg, #6B46C1 0%, #00D9FF 50%, #FF6B9D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 30px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background: linear-gradient(90deg, #6B46C1, #00D9FF, #FF6B9D);
+            border-radius: 3px;
+            animation: lineGrow 2s ease infinite;
+        }
+
+        @keyframes lineGrow {
+            0%, 100% { width: 150px; }
+            50% { width: 250px; }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.8s ease;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(107, 70, 193, 0.6);
+            border-color: rgba(0, 217, 255, 0.5);
+        }
+
+        /* About Section */
+        .about-intro {
+            font-size: 1.6em;
+            line-height: 2.2;
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .subtle-flex {
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* Personal Info Grid */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 25px;
+            border-left: 5px solid #6B46C1;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(107, 70, 193, 0.2), rgba(0, 217, 255, 0.2));
+            transition: all 0.5s ease;
+        }
+
+        .info-card:hover::before {
+            width: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateX(20px) scale(1.05);
+            border-left-color: #00D9FF;
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .info-card i {
+            font-size: 3em;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 1;
+        }
+
+        .info-content {
+            z-index: 1;
+        }
+
+        .info-content strong {
+            color: #00D9FF;
+            font-size: 1.2em;
+            display: b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .info-content span {
+            color: #cccccc;
+            font-size: 1.1em;
+        }
+
+        /* Timeline with Animated Path */
+        .timeline {
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 0;
+            background: linear-gradient(180deg, #6B46C1 0%, #00D9FF 50%, #FF6B9D 100%);
+            border-radius: 3px;
+            animation: pathGrow 3s ease forwards;
+        }
+
+        @keyframes pathGrow {
+            to { height: 100%; }
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 45px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            transition: all 0.6s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .timeline-content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-20px) scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 70px rgba(107, 70, 193, 0.7);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            border-radius: 50%;
+            border: 6px solid #0a0a0a;
+            box-shadow: 0 0 30px rgba(107, 70, 193, 1);
+            z-index: 1;
+            animation: dotPulse 2s ease infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(107, 70, 193, 1); }
+            50% { box-shadow: 0 0 50px rgba(0, 217, 255, 1); }
+        }
+
+        .timeline-year {
+            font-size: 3em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .timeline-content h3 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .timeline-content p {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin: 15px 0;
+            line-height: 2;
+        }
+
+        .achievement-badge {
+            display: inline-b;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 800;
+            margin-top: 25px;
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.7);
+            animation: badgeShine 3s infinite;
+        }
+
+        @keyframes badgeShine {
+            0%, 100% { box-shadow: 0 10px 35px rgba(255, 215, 0, 0.7); }
+            50% { box-shadow: 0 15px 50px rgba(255, 215, 0, 1); }
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(107, 70, 193, 0.2);
+            padding: 18px 30px;
+            border-radius: 15px;
+            margin-top: 25px;
+            font-size: 1.3em;
+            color: #FFD700;
+            border: 2px solid rgba(107, 70, 193, 0.5);
+        }
+
+        /* Skills Grid with 3D Flip */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .skill-card {
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .skill-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .skill-card:hover .skill-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .skill-card-front, .skill-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 30px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .skill-card-front {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .skill-card-back {
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            transform: rotateY(180deg);
+            box-shadow: 0 20px 60px rgba(107, 70, 193, 0.8);
+        }
+
+        .skill-icon {
+            font-size: 5em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .skill-card h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .skill-card p {
+            font-size: 1.2em;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        .skill-card-back h3, .skill-card-back p {
+            color: #ffffff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 25px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 10px;
+            transition: width 2s ease;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+            animation: progressGlow 2s ease infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+        }
+
+        /* Quotes Section */
+        .quotes-section {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(0, 217, 255, 0.1));
+            padding: 100px 0;
+            margin: 100px 0;
+            border-radius: 40px;
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+        }
+
+        .quote-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            border-left: 8px solid #6B46C1;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 40px;
+            font-size: 10em;
+            color: rgba(107, 70, 193, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 20px 60px rgba(107, 70, 193, 0.6);
+            border-left-color: #00D9FF;
+        }
+
+        .quote-text {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            line-height: 2;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-size: 1.3em;
+            color: #00D9FF;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        /* Goals Section */
+        .goals-content {
+            background: linear-gradient(135deg, #ffffff 0%, #e8e8ff 100%);
+            color: #000000;
+            padding: 80px;
+            border-radius: 40px;
+            border: 4px solid #6B46C1;
+            box-shadow: 0 30px 80px rgba(107, 70, 193, 0.6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goals-content::before {
+            content: '🎯';
+            font-size: 15em;
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            opacity: 0.1;
+            animation: emojiRotate 20s linear infinite;
+        }
+
+        @keyframes emojiRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .goals-content h3 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .goals-content p {
+            font-size: 1.7em;
+            line-height: 2.3;
+            font-weight: 500;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .strength-item {
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            color: #ffffff;
+            padding: 35px;
+            border-radius: 25px;
+            font-size: 1.5em;
+            font-weight: 700;
+            border: 4px solid #ffffff;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 30px rgba(107, 70, 193, 0.5);
+        }
+
+        .strength-item:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.8);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 35px 70px;
+            border-radius: 50px;
+            border: 3px solid rgba(107, 70, 193, 0.5);
+            font-size: 1.6em;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 25px;
+            min-width: 450px;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .contact-item:hover {
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            border-color: #ffffff;
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(107, 70, 193, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 70px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            color: #ffffff;
+            padding: 25px 60px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.5em;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 4px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 40px rgba(107, 70, 193, 0.6);
+        }
+
+        .social-btn:hover {
+            background: #ffffff;
+            color: #6B46C1;
+            transform: translateY(-12px) scale(1.12);
+            box-shadow: 0 25px 60px rgba(0, 217, 255, 0.8);
+            border-color: #6B46C1;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a0a0a, #1a0a2e);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 30px;
+            border-top: 4px solid #6B46C1;
+            margin-top: 120px;
+        }
+
+        footer p {
+            font-size: 1.5em;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #6B46C1, #00D9FF);
+            color: #ffffff;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: 4px solid #ffffff;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(107, 70, 193, 0.7);
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-10px) scale(1.15);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 1);
+        }
+
+        /* Secret Love Modal */
+        .love-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%);
+            background-size: 400% 400%;
+            z-index: 10000;
+            overflow-y: auto;
+            animation: loveGradient 15s ease infinite;
+        }
+
+        @keyframes loveGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+     /* এই অংশটুকু রিপ্লেস করুন */
+.love-modal.active {
+    display: block; /* flex এর বদলে block দিন যাতে স্ক্রল করা যায় */
+    overflow-y: auto; /* ভার্টিক্যাল স্ক্রল অন থাকবে */
+    padding-top: 50px; /* উপরে একটু জায়গা থাকবে */
+}
+
+.love-content {
+    display: none;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 50px 30px 100px; /* নিচে জায়গা বাড়ানো হলো */
+    text-align: center;
+    position: relative;
+    z-index: 10002; /* নিশ্চিত করুন এটি সবার উপরে আছে */
+}
+
+        /* Password Screen with Heart Puzzle */
+        .password-screen {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 70px;
+            border-radius: 40px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .password-screen::before {
+            content: '💕';
+            position: absolute;
+            font-size: 20em;
+            top: -100px;
+            right: -100px;
+            opacity: 0.1;
+            animation: heartBeat 3s ease infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+
+        .password-screen h2 {
+            font-size: 3em;
+            color: #c44569;
+            margin-bottom: 35px;
+            font-weight: 900;
+        }
+
+        .password-input {
+            padding: 22px 40px;
+            font-size: 1.5em;
+            border: 4px solid #ff6b9d;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 30px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            border-color: #c44569;
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+        }
+
+        .password-btn {
+            padding: 22px 60px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
+        }
+
+        .password-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 15px 45px rgba(255, 107, 157, 0.9);
+        }
+
+        .close-love {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 3.5em;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            z-index: 10001;
+        }
+
+        .close-love:hover {
+            transform: rotate(90deg) scale(1.3);
+            color: #ffe0e9;
+        }
+
+        /* Love Content */
+        .love-content {
+            display: none;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 100px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .love-content.active {
+            display: b;
+            animation: fadeInScale 1s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Rose Petals */
+        .rose-petal {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ff6b9d, #ff1493);
+            border-radius: 50% 0 50% 0;
+            pointer-events: none;
+            z-index: 1;
+            animation: petalFall 8s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes petalFall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                top: 110vh;
+                transform: translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Butterfly */
+        .butterfly {
+            position: fixed;
+            font-size: 3.5em;
+            animation: butterflyFly 18s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes butterflyFly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, -100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: fixed;
+            width: 3px;
+            height: 100px;
+            background: linear-gradient(to bottom, #ffffff, transparent);
+            animation: shootingStar 2s ease-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        .love-title {
+            font-size: 5em;
+            color: #ffffff;
+            margin-bottom: 50px;
+            font-weight: 900;
+            text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4);
+            animation: titleHeartbeat 2.5s ease infinite;
+        }
+
+        @keyframes titleHeartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.08); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.08); }
+        }
+
+        /* Photo Gallery - 3D Carousel */
+        .photo-gallery {
+            margin: 60px auto;
+            perspective: 1200px;
+            height: 500px;
+            position: relative;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: carouselRotate 30s linear infinite;
+        }
+
+        @keyframes carouselRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .photo-frame {
+            position: absolute;
+            width: 350px;
+            height: 400px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 85%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-caption {
+            color: #c44569;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Polaroid Stack Effect */
+        .polaroid-stack {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 70px 0;
+            flex-wrap: wrap;
+        }
+
+        .polaroid {
+            background: #ffffff;
+            padding: 20px 20px 60px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .polaroid:nth-child(1) { transform: rotate(-5deg); }
+        .polaroid:nth-child(2) { transform: rotate(3deg); }
+        .polaroid:nth-child(3) { transform: rotate(-3deg); }
+        .polaroid:nth-child(4) { transform: rotate(7deg); }
+
+        .polaroid:hover {
+            transform: scale(1.2) rotate(0deg) translateY(-20px);
+            z-index: 10;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .polaroid img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            display: b;
+        }
+
+        .polaroid-text {
+            text-align: center;
+            color: #333;
+            font-size: 1.3em;
+            font-style: italic;
+            margin-top: 15px;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        /* Love Message */
+        .love-message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 70px;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            margin: 70px auto;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .love-message::before {
+            content: '💌';
+            position: absolute;
+            font-size: 12em;
+            top: -60px;
+            right: -60px;
+            opacity: 0.15;
+        }
+
+        .love-message h3 {
+            font-size: 3em;
+            color: #c44569;
+            margin-bottom: 35px;
+            font-weight: 900;
+        }
+
+        .love-message p {
+            font-size: 1.8em;
+            color: #333;
+            line-height: 2.3;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .smile-emoji {
+            font-size: 4.5em;
+            display: inline-b;
+            animation: emojiFloat 3.5s ease-in-out infinite;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(12deg); }
+        }
+
+        /* Floating Emojis */
+        .floating-emoji {
+            position: fixed;
+            font-size: 3.5em;
+            animation: emojiFloatAround 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes emojiFloatAround {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -20px); }
+            50% { transform: translate(0, -40px); }
+            75% { transform: translate(-20px, -20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8em;
+            }
+
+            .section-title {
+                font-size: 2.5em;
+            }
+
+            .profile-img-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .contact-item {
+                min-width: 320px;
+                font-size: 1.3em;
+                padding: 28px 50px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 80px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .love-title {
+                font-size: 3.2em;
+            }
+
+            .love-message {
+                padding: 50px 30px;
+            }
+
+            .love-message p {
+                font-size: 1.5em;
+            }
+
+            .polaroid img {
+                width: 220px;
+                height: 220px;
+            }
+
+            .photo-frame {
+                width: 280px;
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Floating Shapes -->
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">SR</a>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#timeline"><i class="fas fa-graduation-cap"></i> Journey</a></li>
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#quotes"><i class="fas fa-quote-left"></i> Philosophy</a></li>
+                <li><a href="#goals"><i class="fas fa-bullseye"></i> Goals</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-card">
+                <div class="profile-img-container">
+                    <div class="orbit-particle"></div>
+                    <div class="orbit-particle"></div>
+                    <div class="orbit-particle"></div>
+                  <div class="orbit-particle"></div>
+<img src="https://i.ibb.co/mF5xCg3m/file-0000000061c471fa99868cdd03cdf9d1.png"
+     alt="Md. Saidur Rahaman"
+     class="profile-img"> </div>
+                
+                <h1>Saidur Rahaman</h1>
+                
+                <div class="typing-container">
+                    <p class="typing-text" id="typingText"></p>
+                </div>
+
+                <div class="dream-tag">
+                    <i><b>⚡Hello I'm Saidur your Friend🌈</b></i>
+                </div>
+                
+                <div class="tagline">
+                    "Assalamualaikum & Welcome My Profile ! "
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="#about" class="cta-btn"><i class="fas fa-rocket"></i> Explore Journey</a>
+                    <a href="#contact" class="cta-btn"><i class="fas fa-paper-plane"></i> Connect</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Who Am I?</h2>
+            <div class="glass-card">
+                <p class="about-intro">
+                    একজন সাধারণ Science student যে <span class="subtle-flex">quietly extraordinary</span> হওয়ার পথে এগিয়ে চলেছে। 
+                    মেন পড়ার পাশাপাশি :-প্রযুক্তি, কোডিং, ডিজাইন—এসব শিখছি, কিন্তু <span class="subtle-flex">নিজের মতো করে</span>। 
+                    কারো সাথে তুলনা নয়, <span class="subtle-flex">নিজের সাথে প্রতিযোগিতা</span>। 
+                    আজ যেটা জানি না, কাল সেটা শিখে নেব—<span class="subtle-flex">এই আত্মবিশ্বাসই আমার শক্তি</span>।
+                </p>
+                
+                <div class="personal-info">
+                    <div class="info-card">
+                        <i class="fas fa-birthday-cake"></i>
+                        <div class="info-content">
+                            <strong>Born:</strong>
+                            <span>01 January 2009 (17 years young) <br> <p class="formula">জন্ম নিবন্ধন 🙂</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-flag"></i>
+                        <div class="info-content">
+                            <strong>Nationality:</strong>
+                            <span>Bangladeshi 🇧🇩</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-tint"></i>
+                        <div class="info-content">
+                            <strong>Blood Group:</strong>
+                            <span>A+ (⚡Positive vibes only⚡)</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-content">
+                            <strong>Location:</strong>
+                            <span>Charpara,Insafnagar, Doulatpur,Kushtia, Bangladesh</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="info-content">
+                            <strong>Phone:</strong>
+                            <span>01770157540</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info-content">
+                            <strong>Email:</strong>
+                            <span>issaidur999@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <div class="container">
+            <h2 class="section-title">My Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2008</div>
+                        <h3><i class="fas fa-baby"></i> The Beginning</h3>
+                        <p>01 January 2008 তে শুরু হয় এই journey। Digital era তে জন্ম—</p>
+                        <p>যখন technology দুনিয়া পাল্টাতে শুরু করেছে, তখনই এসেছি।</p>
+                        <p class="formula">Birth Year = 2008 → Age(2026) = 18 years</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3><i class="fas fa-trophy"></i> SSC Victory</h3>
+                        <p><strong>Group:</strong> Science</p>
+                        <p><strong>Board:</strong> Jashore Board</p>
+                        <p><strong>Institution:</strong> Insaf Nagar Secondary School</p>
+                        <p> প্রবাদে বর্ণিত <strong>hard work কখনো বিফল হয় না</strong>।</p>
+                        <span class="achievement-badge"><i class="fas fa-medal"></i> GPA 5.00 - Golden A+</span>
+                        <p class="formula">Success = (Dedication)² × Consistency</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2026</div>
+                        <h3><i class="fas fa-book-reader"></i> HSC Journey</h3>
+                        <p><strong>College:</strong> Shahid Abul Hasnat Muhammad Kamaruzzaman Govt. Degree College, Rajshahi</p>
+                        <p><strong>Session:</strong> 2025-2026</p>
+                        <p><strong>Student ID:</strong> 20251357</p>
+                        <p>এখন সর্বোচ্চ চেষ্টা  করছি—<strong>আরো বড় কিছুর জন্য</strong>।</p>
+                        <span class="achievement-badge"><i class="fas fa-spinner fa-spin"></i> Currently Building...</span>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2027+</div>
+                        <h3><i class="fas fa-rocket"></i> The Future</h3>
+                        <p><strong>Target:</strong> BUET OR Dhaka University</p>
+                        <p>University & BUET → Web Development ,EEE,CSE,Furmacy & other  → Tech Innovation</p>
+                        <p>স্বপ্ন দেখছি একদিন নিজের তৈরি কিছু দিয়ে <strong>মানুষের জীবন সহজ</strong> করব।</p>
+                        <p class="formula">Dream = Vision + Action × Time</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <h3>HTML & CSS</h3>
+                            <p>Web structure & styling</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>HTML & CSS</h3>
+                            <p>✨ Modern, Try To Learn  </p>
+                            <p>🎨 Flexbox & Grid mastery</p>
+                            <p>💫 Animations & transitions</p>
+                            <p>📱 Mobile-first approach</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <h3>JavaScript</h3>
+                            <p>Interactive functionality</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>JavaScript</h3>
+                            <p>⚡ DOM manipulation expert</p>
+                            <p>🔄 Async programming</p>
+                            <p>🎯 Event handling pro</p>
+                            <p>🚀 ES6+ features</p>
+							 <p> Try to Learn </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h3>Responsive Design</h3>
+                            <p>Mobile-first approach</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Responsive Design</h3>
+                            <p>📱 Perfect on all devices</p>
+                            <p>🖥️ Desktop optimization</p>
+                            <p>⚡ Performance focused</p>
+                            <p>✨ Smooth transitions</p>
+							<p> Try to Learn 🫰</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-palette"></i></div>
+                            <h3>Creative Thinking</h3>
+                            <p>Design & innovation</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Creative Thinking</h3>
+                            <p>🎨 Unique design concepts</p>
+                            <p>💡 Problem-solving mindset</p>
+                            <p>✨ User experience focus</p>
+                            <p>🌈 Color theory mastery</p>
+							 <p><b><i><del> I'M Overthinker</del></i></b></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-video"></i></div>
+                            <h3>Video Editing</h3>
+                            <p>Alight Motion & More</p>
+							 <p> Capcut Template Maker 🪩</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Video Editing</h3>
+                            <p>🎬 Alight Motion expert</p>
+                            <p>🎨 Marter AI proficient</p>
+                            <p>✨ Advanced transitions</p>
+                            <p>🎭 Creative effects</p>
+							 <p> 🏅 I'm The best</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-puzzle-piece"></i></div>
+                            <h3>Problem Solving</h3>
+                            <p>Logical approach</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Problem Solving</h3>
+                            <p>🧩 Analytical thinking</p>
+                            <p>🎯 Goal-oriented approach</p>
+                            <p>💪 Persistent learner</p>
+                            <p>🔍 Detail-focused</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-rocket"></i></div>
+                            <h3>Fast Learner</h3>
+                            <p>Quick adaptation</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Fast Learner</h3>
+                            <p>📚 Constantly learning</p>
+                            <p>⚡ Quick implementation</p>
+                            <p>🎓 Self-taught skills</p>
+                            <p>🌟 Always improving</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                            <h3>Tech Research</h3>
+                            <p>Exploring new tech</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Tech Research</h3>
+                            <p>🔬 Latest tech trends</p>
+                            <p>📖 Documentation reader</p>
+                            <p>🌐 Online learning</p>
+                            <p>💻 Hands-on practice</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes & Philosophy Section -->
+    <section id="quotes" class="quotes-section">
+        <div class="container">
+            <h2 class="section-title">Life Philosophy</h2>
+            
+            <div class="quotes-grid">
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "যে বল প্রয়োগ না করলে বস্তু স্থির থাকে, সেই বল আমি নিজে।
+                        নিজেকেই পরিবর্তনের শক্তি হতে হবে।"
+                    </p>
+                    <p class="quote-author">— Newton's 1st Law Applied to Life</p>
+                    <div class="formula">F = ma → Force = My Ambition</div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "E=mc² শেখায় যে ছোট জিনিসেও বিশাল শক্তি লুকিয়ে থাকে।
+                        আমিও ছোট, কিন্তু আমার স্বপ্ন বিশাল।"
+                    </p>
+                    <p class="quote-author">— Einstein's Wisdom</p>
+                    <div class="formula">Energy = Mass × Speed²</div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "a² + b² = c² → দুটো ছোট প্রচেষ্টা মিলে একটা বড় সাফল্য।
+                        প্রতিদিন ছোট ছোট পদক্ষেপ, একদিন বড় গন্তব্য।"
+                    </p>
+                    <p class="quote-author">— Pythagoras Theorem in Life</p>
+                    <div class="formula">Small Steps + Small Steps = Big Achievement</div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "আমি বলি না যে আমি সেরা, কিন্তু আমি প্রমাণ করব।
+                        কথায় নয়, কাজে বিশ্বাস করি।"
+                    </p>
+                    <p class="quote-author">— My Personal Motto</p>
+                    <div class="formula">Action > Words</div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "18 বছর বয়সে আমি শিখছি, 28 বছর বয়সে আমি তৈরি করব,
+                        38 বছর বয়সে আমি inspire করব।"
+                    </p>
+                    <p class="quote-author">— The Decade Plan</p>
+                    <div class="formula">Learn → Build → Inspire</div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">
+                        "প্রতিটি ব্যর্থতা একটা equation যা আমাকে শেখায়
+                        কোথায় ভুল হয়েছে। সমাধান খুঁজতে থাকি।"
+                    </p>
+                    <p class="quote-author">— Problem Solver Mindset</p>
+                    <div class="formula">Failure + Learning = Success</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section id="goals">
+        <div class="container">
+            <h2 class="section-title">Career Vision</h2>
+            
+            <div class="goals-content">
+                <h3>🎯 My Mission</h3>
+                <p>
+                    একজন <strong>ভালো মানুষ </strong> এবং <strong>সাহায্য কারী </strong> হওয়া।
+                    নিজের দক্ষতা দিয়ে এমন কিছু তৈরি করা যা মানুষের কাজ সহজ করবে,
+                    এবং দেশের জন্য গর্বের কারণ হবে।
+                </p>
+                
+                <h3 style="margin-top: 60px;">🎓 Academic Dream</h3>
+                <p>
+                    <strong>BUET</strong> OR <strong>Dhaka University</strong> তে ভর্তি হয়ে 
+                    দেশের সেরা প্রতিষ্ঠান থেকে শিক্ষা নেওয়া এবং 
+                    প্রযুক্তিতে,অন্য সব কিছুতে  বাংলাদেশকে এগিয়ে নিয়ে যাওয়া।
+                </p>
+                
+                <h3 style="margin-top: 60px;">💪 Personal Strengths</h3>
+                <div class="strengths-grid">
+                    <div class="strength-item"><i class="fas fa-fire"></i> আত্মবিশ্বাসী</div>
+                    <div class="strength-item"><i class="fas fa-c"></i> ধৈর্যশীল</div>
+                    <div class="strength-item"><i class="fas fa-book"></i> শেখার আগ্রহ</div>
+                    <div class="strength-item"><i class="fas fa-lightbulb"></i> সৃজনশীল</div>
+                    <div class="strength-item"><i class="fas fa-shield-alt"></i> দায়িত্বশীল</div>
+                    <div class="strength-item"><i class="fas fa-star"></i> লক্ষ্যভিত্তিক</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            
+            <div class="contact-info">
+                <a href="mailto:issaidur999@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i> issaidur999@gmail.com
+                </a>
+                
+                <a href="tel:01770157540" class="contact-item">
+                    <i class="fas fa-phone-alt"></i> 01770157540
+                </a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.facebook.com/saidur.sono" target="_blank" class="social-btn">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+                <a href="https://www.tiktok.com/@no_word_9" target="_blank" class="social-btn">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Md. Saidur Rahaman | All Rights Reserved</p>
+        <p style="margin-top: 20px; font-size: 1.2em; color: #00D9FF;">
+            <i class="fas fa-quote-left"></i> Silent Worker, Loud Results <i class="fas fa-quote-right"></i>
+        </p>
+        <p style="margin-top: 15px; font-size: 1em; color: #999;">
+            Built with <i class="fas fa-heart" style="color: #ff6b9d;"></i> & Dedication
+        </p>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Secret Love Modal -->
+    <div class="love-modal" id="loveModal">
+        <span class="close-love" onclick="closeLoveModal()">&times;</span>
+        
+        <!-- Password Screen -->
+        <div class="password-screen" id="passwordScreen">
+            <h2><i class="fas fa-heart-broken"></i> Secret Access</h2>
+            <p style="color: #c44569; font-size: 1.3em; margin-bottom: 30px; font-weight: 600;">
+                For Special 💕
+            </p>
+            <input type="password" id="lovePassword" class="password-input" placeholder="Enter password" maxlength="20">
+            <br>
+            <button onclick="checkPassword()" class="password-btn">
+                <i class="fas fa-un"></i> Unlock
+            </button>
+            <p id="errorMsg" style="color: #ff0000; margin-top: 25px; font-size: 1.2em; font-weight: 600;"></p>
+        </div>
+
+        
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+            
+            // Create trail
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.left = mouseX + 'px';
+            trail.style.top = mouseY + 'px';
+            document.body.appendChild(trail);
+            
+            setTimeout(() => trail.remove(), 500);
+        });
+
+        // Smooth follower
+        setInterval(() => {
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+        }, 16);
+
+        // Typing Animation
+        const texts = [
+            '⚡Science Student⚡',
+            '⚡Overthinker⚡',
+            '⚡Future Developer⚡',
+            '⚡Creative Designer⚡',
+            '⚡Video Editor⚡',
+            '⚡Problem Solver⚡',
+            '⚡Dream Chaser⚡'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeText() {
+            const currentText = texts[textIndex];
+            const displayText = document.getElementById('typingText');
+            
+            if (isDeleting) {
+                displayText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                displayText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(typeText, typingSpeed);
+        }
+
+        typeText();
+
+        // Scroll to Top
+        const scrollTopBtn = document.querySelector('.scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Timeline Animation on Scroll
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            timelineObserver.observe(content);
+        });
+
+        // Secret Love Modal Functions
+        function openLoveModal(event) {
+            event.preventDefault();
+            document.getElementById('loveModal').classList.add('active');
+            document.getElementById('passwordScreen').style.display = 'b';
+            document.getElementById('loveContent').classList.remove('active');
+            document.getElementById('lovePassword').value = '';
+            document.getElementById('errorMsg').textContent = '';
+            
+            // Start rose petals
+            createRosePetals();
+        }
+
+        function closeLoveModal() {
+            document.getElementById('loveModal').classList.remove('active');
+            // Remove all petals
+            document.querySelectorAll('.rose-petal').forEach(petal => petal.remove());
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('lovePassword').value;
+            const correctPassword = 'formybesty';
+            
+            if (password === correctPassword) {
+                document.getElementById('passwordScreen').style.display = 'none';
+                document.getElementById('loveContent').classList.add('active');
+                document.getElementById('errorMsg').textContent = '';
+                
+                // Create butterflies
+                for (let i = 0; i < 25; i++) {
+                    setTimeout(() => createButterfly(), i * 300);
+                }
+                
+                // Create shooting stars
+                setInterval(createShootingStar, 5000);
+                
+                // Create floating emojis
+                createFloatingEmojis();
+            } else {
+                document.getElementById('errorMsg').textContent = '❌ Wrong password! This is only for someone special.';
+            }
+        }
+
+        // Rose Petals Effect
+        function createRosePetals() {
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.className = 'rose-petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                document.getElementById('loveModal').appendChild(petal);
+                
+                setTimeout(() => petal.remove(), 10000);
+            }, 300);
+        }
+
+        // Butterfly Effect
+        function createButterfly() {
+            const butterfly = document.createElement('div');
+            butterfly.className = 'butterfly';
+            butterfly.textContent = '🦋';
+            butterfly.style.top = Math.random() * 100 + '%';
+            butterfly.style.left = Math.random() * 100 + '%';
+            butterfly.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('loveContent').appendChild(butterfly);
+            
+            setTimeout(() => butterfly.remove(), 20000);
+        }
+
+        // Shooting Star Effect
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            document.getElementById('loveModal').appendChild(star);
+            
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        // Floating Emojis
+        function createFloatingEmojis() {
+            const emojis = ['😊', '💕', '💖', '💝', '✨', '🌸'];
+            const positions = [
+                { top: '15%', right: '10%' },
+                { top: '25%', left: '8%' },
+                { bottom: '20%', right: '15%' },
+                { bottom: '30%', left: '12%' }
+            ];
+            
+            positions.forEach((pos, index) => {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emoji';
+                emoji.textContent = emojis[index % emojis.length];
+                Object.assign(emoji.style, pos);
+                emoji.style.animationDelay = index * 0.5 + 's';
+                document.getElementById('loveContent').appendChild(emoji);
+            });
+        }
+
+        // Enter key to submit password
+        document.getElementById('lovePassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('loveModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLoveModal();
+            }
+        });
+
+        // Smooth reveal animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                section.style.transition = 'all 0.8s ease';
+                observer.observe(section);
+            });
+        });
+
+        // Skill Progress Bar Animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+
+        // Console Easter Egg
+        console.log('%c🚀 Welcome to Saidur\'s Ultimate Portfolio!', 'color: #6B46C1; font-size: 28px; font-weight: bold;');
+        console.log('%c💻 Built with passion, dedication & advanced animations', 'color: #00D9FF; font-size: 18px;');
+        console.log('%c🔒 Psst... there\'s a  love page. Can you un it? 😉', 'color: #FF6B9D; font-size: 16px; font-style: italic;');
+    </script>
+</body>
+</html>
