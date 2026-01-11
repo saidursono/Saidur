@@ -1687,28 +1687,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-}
-
-/* Open CV Button */
-.cv-open-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-    transition: all 0.3s ease;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .cv-open-btn:hover {
     transform: translateY(-3px);
@@ -4053,7 +4031,7 @@ body {
                 <tr>
                     <td class="label"><i class="fas fa-mosque"></i> Religion</td>
                     <td class="value">Islam</td>
-                    <td class="label"><i class="fas fa-users"></i> Quota</td>
+                    <td class="label"><i class="fas fa-users"></i>~~~</td>
                     <td class="value">Education</td>
                 </tr>
             </table>
@@ -4106,7 +4084,7 @@ body {
                     <td class="label"><i class="fas fa-id-card"></i> Mother's NID</td>
                     <td class="value">4171450127</td>
                     <td class="label"><i class="fas fa-money-bill"></i> Yearly Income</td>
-                    <td class="value">100,000 BDT</td>
+                    <td class="value">~~~ BDT</td>
                 </tr>
             </table>
         </div>
@@ -4783,6 +4761,7 @@ body {
                 <p>
                     Forever and always... 💕
                 </p>
+					<p> sotti re kutta 😊</p>
             </div>
         </div>
     </div>
@@ -5118,7 +5097,6 @@ window.onclick = function(event) {
         closeCV();
     }
 }
-
 // Close modal with ESC key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
@@ -5300,7 +5278,7 @@ function downloadCV() {
 
         function checkPassword() {
             const password = document.getElementById('lovePassword').value;
-            const correctPassword = 'saidur&sinthia';
+            const correctPassword = 'formybesty';
             
             if (password === correctPassword) {
                 document.getElementById('passwordScreen').style.display = 'none';
