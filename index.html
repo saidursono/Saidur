@@ -19,6 +19,15 @@
       gtag('config', 'G-KQ3KDJ6QZG');
     </script>
     
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS Initialization - No account needed, messages go to issaidur999@gmail.com
+        (function(){
+            emailjs.init("4AX3Y75k3McGT9aPD"); // Will be configured below
+        })();
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -197,7 +206,7 @@
 
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             list-style: none;
             align-items: center;
         }
@@ -205,9 +214,9 @@
         .nav-links a, .theme-toggle {
             color: var(--light);
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 500;
-            padding: 10px 18px;
+            padding: 10px 15px;
             border-radius: 30px;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             border: 2px solid transparent;
@@ -276,6 +285,163 @@
             color: #333;
         }
 
+        /* Chatbot Button */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: var(--light);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(107, 70, 193, 0.7);
+            z-index: 998;
+            transition: all 0.3s ease;
+            border: 4px solid var(--light);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.9);
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            position: fixed;
+            bottom: 210px;
+            right: 40px;
+            width: 400px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+        }
+
+        body.light-mode .chatbot-window {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .chatbot-window.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px;
+            color: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            font-size: 1.3em;
+        }
+
+        .chatbot-close {
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        body.light-mode .chatbot-messages {
+            background: #fff;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.bot {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            margin-right: auto;
+        }
+
+        .chat-message.user {
+            background: #e0e0e0;
+            color: #333;
+            margin-left: auto;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            background: var(--light);
+            border-top: 2px solid var(--primary);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            margin-left: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.6);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -330,7 +496,7 @@
             animation: profileRotate 10s linear infinite;
         }
 
-        @keyframes profileRotate {
+    @keyframes profileRotate {
     0%, 100% { filter: drop-shadow(0 0 30px rgba(107, 70, 193, 0.8)); }
     50% { filter: drop-shadow(0 0 50px rgba(0, 217, 255, 0.8)); }
 }
@@ -1077,6 +1243,131 @@
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.6);
         }
 
+        /* Certificates Section */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            text-align: center;
+        }
+
+        body.light-mode .certificate-card {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 25px 70px rgba(107, 70, 193, 0.7);
+        }
+
+        .certificate-icon {
+            font-size: 5em;
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .certificate-card h3 {
+            font-size: 1.8em;
+            color: var(--light);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        body.light-mode .certificate-card h3 {
+            color: #333;
+        }
+
+        .certificate-card p {
+            font-size: 1.1em;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        body.light-mode .certificate-card p {
+            color: #555;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        body.light-mode .blog-card {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(107, 70, 193, 0.7);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 30px;
+            color: var(--light);
+        }
+
+        .blog-header h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .blog-date {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .blog-content {
+            padding: 30px;
+        }
+
+        .blog-excerpt {
+            font-size: 1.1em;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        body.light-mode .blog-excerpt {
+            color: #555;
+        }
+
+        .read-more {
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--accent);
+        }
+
         /* Quotes Section */
         .quotes-section {
             background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(0, 217, 255, 0.1));
@@ -1325,6 +1616,11 @@
             box-shadow: 0 15px 40px rgba(0, 217, 255, 0.6);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .form-message {
             margin-top: 20px;
             padding: 15px;
@@ -1378,6 +1674,1028 @@
             box-shadow: 0 25px 60px rgba(0, 217, 255, 0.8);
             border-color: var(--primary);
         }
+
+        /* CV Modal */
+/* CV Modal Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700;800&family=Raleway:wght@300;400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Open CV Button */
+.cv-open-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cv-open-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}
+
+.cv-open-btn i {
+    font-size: 18px;
+}
+
+/* Modal */
+.cv-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.cv-content {
+    background: #ffffff;
+    margin: 2% auto;
+    width: 95%;
+    max-width: 1200px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.4s ease;
+    overflow: hidden;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.close-cv {
+    position: sticky;
+    top: 15px;
+    right: 15px;
+    float: right;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 100;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    margin: 10px 20px 0 0;
+}
+
+.close-cv:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+}
+
+/* Header */
+.cv-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 40px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px);
+    pointer-events: none;
+}
+
+.cv-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    font-weight: 900;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.cv-name-bn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8em;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.cv-designation {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 15px 0 30px;
+}
+
+.contact-bar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.contact-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 25px;
+    border-radius: 30px;
+    color: white;
+    font-size: 0.95em;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255,255, 0.3);
+    transform: translateY(-2px);
+}
+
+.contact-item i {
+    margin-right: 8px;
+}
+
+/* Sections */
+.cv-section {
+    padding: 40px 50px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.cv-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-weight: 800;
+    border-bottom: 4px solid #667eea;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.section-title i {
+    margin-right: 12px;
+    color: #764ba2;
+}
+
+.sub-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+    color: #764ba2;
+    margin: 30px 0 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.sub-title i {
+    margin-right: 10px;
+}
+
+/* Information Table */
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-table tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-table tr:last-child {
+    border-bottom: none;
+}
+
+.info-table td {
+    padding: 15px 20px;
+    font-size: 0.95em;
+}
+
+.info-table .label {
+    font-weight: 600;
+    color: #555;
+    width: 25%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.info-table .label i {
+    margin-right: 8px;
+    color: #667eea;
+}
+
+.info-table .value {
+    color: #333;
+    width: 25%;
+    font-weight: 500;
+}
+
+/* Subject Table */
+.subject-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.subject-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.subject-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+}
+
+.subject-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.subject-table tbody tr:hover {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transform: translateX(5px);
+}
+
+.subject-table tbody td {
+    padding: 15px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.subject-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.compulsory {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.badge.group {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.badge.optional {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+}
+
+/* Education Section */
+.education-section {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 20%, #ffecd2 100%);
+}
+
+/* Result Section */
+.result-section {
+    position: relative;
+}
+
+.result-badge {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.result-badge i {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.result-badge span {
+    font-size: 2em;
+    font-weight: 800;
+    display: block;
+    font-family: 'Playfair Display', serif;
+}
+
+.result-badge p {
+    font-size: 1.1em;
+    margin-top: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Marks Table */
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.marks-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.marks-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.95em;
+}
+
+.marks-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.marks-table tbody tr:hover {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.marks-table tbody tr.perfect-score {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    font-weight: 600;
+}
+
+.marks-table tbody tr.perfect-score:hover {
+    background: linear-gradient(135deg, #fcb69f 0%, #ffecd2 100%);
+}
+
+.marks-table tbody td {
+    padding: 15px;
+    text-align: center;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.marks-table tbody td:nth-child(2) {
+    text-align: left;
+    font-weight: 500;
+}
+
+.marks-table tfoot {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    color: white;
+}
+
+.marks-table tfoot tr.total-row td {
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Grade Badge */
+.grade-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9em;
+}
+
+.grade-badge.perfect {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(245, 87, 108, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(245, 87, 108, 0.8);
+    }
+}
+
+/* Skills Table */
+.skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skills-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.skills-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.skills-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.skills-table tbody tr:hover {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    transform: translateX(5px);
+}
+
+.skills-table tbody td {
+    padding: 15px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.skills-table tbody td:first-child {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.skills-table tbody td i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.skill-level {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.skill-level.expert {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.skill-level.advanced {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.skill-level.intermediate {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+}
+
+/* Projects Table */
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.projects-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.projects-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.projects-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.projects-table tbody tr:hover {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.projects-table tbody td {
+    padding: 15px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.project-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.project-link i {
+    margin-right: 5px;
+}
+
+.coming-soon {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #666;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+/* Achievements Table */
+.achievements-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.achievements-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.achievements-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.achievements-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.achievements-table tbody tr:hover {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    transform: translateX(5px);
+}
+
+.achievements-table tbody td {
+    padding: 15px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.achievements-table tbody td:first-child {
+    font-weight: 600;
+}
+
+.achievements-table tbody td i {
+    margin-right: 8px;
+    font-size: 1.3em;
+}
+
+.achievements-table tbody td i.gold {
+    color: #FFD700;
+}
+
+/* Language Table */
+.language-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.language-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.language-table thead th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.language-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.language-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.language-table tbody td {
+    padding: 15px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.language-table tbody td:first-child {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.language-table tbody td i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.lang-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.lang-badge.native {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.lang-badge.proficient {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+/* Objective Box */
+.objective-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.objective-item {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.objective-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.objective-item h4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.objective-item h4 i {
+    margin-right: 10px;
+    color: #764ba2;
+}
+
+.objective-item p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 0.95em;
+}
+
+/* Footer */
+.cv-footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px 50px;
+    color: white;
+}
+
+.declaration {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 30px;
+}
+
+.declaration p {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.signature-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.signature-box {
+    text-align: center;
+}
+
+.signature-line {
+    width: 250px;
+    height: 2px;
+    background: white;
+    margin: 0 auto 15px;
+}
+
+.signature-box p {
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.signature-box .date {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Scrollbar */
+.cv-modal::-webkit-scrollbar {
+    width: 12px;
+}
+
+.cv-modal::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.cv-modal::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+.cv-modal::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .cv-content {
+        width: 98%;
+        margin: 1% auto;
+    }
+
+    .result-badge {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 20px auto;
+        display: inline-block;
+    }
+
+    .cv-section {
+        padding: 30px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cv-name {
+        font-size: 2.5em;
+    }
+
+    .cv-name-bn {
+        font-size: 1.5em;
+    }
+
+    .cv-designation {
+        font-size: 1em;
+    }
+
+    .contact-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cv-section {
+        padding: 25px 20px;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .info-table .label,
+    .info-table .value {
+        display: block;
+        width: 100%;
+    }
+
+    .info-table .label {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 10px 15px;
+    }
+
+    .info-table .value {
+        padding: 10px 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .subject-table,
+    .marks-table,
+    .skills-table,
+    .projects-table,
+    .achievements-table,
+    .language-table {
+        font-size: 0.85em;
+    }
+
+    .subject-table thead th,
+    .marks-table thead th,
+    .skills-table thead th,
+    .projects-table thead th,
+    .achievements-table thead th,
+    .language-table thead th {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+
+    .subject-table tbody td,
+    .marks-table tbody td,
+    .skills-table tbody td,
+    .projects-table tbody td,
+    .achievements-table tbody td,
+    .language-table tbody td {
+        padding: 10px;
+    }
+
+    .objective-box {
+        grid-template-columns: 1fr;
+    }
+
+    .cv-open-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cv-name {
+        font-size: 2em;
+    }
+
+    .cv-header {
+        padding: 40px 20px 30px;
+    }
+
+    .cv-section {
+        padding: 20px 15px;
+    }
+
+    .section-title {
+        font-size: 1.3em;
+    }
+
+    .marks-table,
+    .subject-table {
+        font-size: 0.75em;
+    }
+
+    .close-cv {
+        width: 35px;
+        height: 35px;
+        font-size: 28px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .cv-modal {
+        display: block !important;
+        position: relative;
+        background: white;
+    }
+
+    .cv-content {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .close-cv,
+    .cv-open-btn {
+        display: none;
+    }
+
+    .cv-section {
+        page-break-inside: avoid;
+    }
+}
 
         /* Footer */
         footer {
@@ -1457,7 +2775,6 @@
             padding-top: 50px;
         }
 
-        /* Password Screen */
         .password-screen {
             text-align: center;
             background: rgba(255, 255, 255, 0.95);
@@ -1547,7 +2864,6 @@
             color: #ffe0e9;
         }
 
-        /* Love Content - Enhanced */
         .love-content {
             display: none;
             max-width: 1300px;
@@ -1564,17 +2880,10 @@
         }
 
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* Enhanced Love Title with Animation */
         .love-title {
             font-size: 8em;
             color: var(--light);
@@ -1597,7 +2906,6 @@
             50% { color: #ffe0e9; text-shadow: 0 0 60px rgba(255, 224, 233, 1); }
         }
 
-        /* Floating Hearts */
         .floating-hearts {
             position: fixed;
             width: 100%;
@@ -1616,23 +2924,12 @@
         }
 
         @keyframes floatHeart {
-            0% {
-                opacity: 0;
-                transform: translateY(100vh) rotate(0deg);
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) rotate(360deg);
-            }
+            0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
         }
 
-        /* Love Message Card */
         .love-message-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 80px 60px;
@@ -1679,7 +2976,6 @@
             z-index: 1;
         }
 
-        /* Animated Hearts Container */
         .hearts-container {
             margin: 60px 0;
             font-size: 5em;
@@ -1691,7 +2987,6 @@
             50% { transform: scale(1.2); }
         }
 
-        /* Rose Petals */
         .rose-petal {
             position: fixed;
             width: 20px;
@@ -1705,19 +3000,10 @@
         }
 
         @keyframes petalFall {
-            0% {
-                top: -50px;
-                transform: translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                top: 110vh;
-                transform: translateX(100px) rotate(720deg);
-                opacity: 0;
-            }
+            0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 1; }
+            100% { top: 110vh; transform: translateX(100px) rotate(720deg); opacity: 0; }
         }
 
-        /* Sparkles */
         .sparkle {
             position: fixed;
             font-size: 2em;
@@ -1734,12 +3020,12 @@
         /* Responsive Design */
         @media (max-width: 1024px) {
             .nav-links {
-                gap: 10px;
+                gap: 8px;
             }
 
             .nav-links a, .theme-toggle {
-                padding: 8px 15px;
-                font-size: 0.85em;
+                padding: 8px 12px;
+                font-size: 0.8em;
             }
 
             .hero h1 {
@@ -1765,6 +3051,11 @@
 
             .timeline-dot {
                 left: 30px;
+            }
+
+            .chatbot-window {
+                width: 350px;
+                height: 450px;
             }
         }
 
@@ -1848,7 +3139,9 @@
 
             .skills-grid,
             .projects-grid,
-            .quotes-grid {
+            .quotes-grid,
+            .blog-grid,
+            .certificates-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1901,6 +3194,29 @@
             .social-btn {
                 padding: 20px 40px;
                 font-size: 1.2em;
+            }
+
+            .chatbot-toggle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+                bottom: 100px;
+                right: 20px;
+            }
+
+            .chatbot-window {
+                width: 90%;
+                height: 70vh;
+                right: 5%;
+                bottom: 180px;
+            }
+
+            .cv-content {
+                padding: 40px 25px;
+            }
+
+            .cv-header h2 {
+                font-size: 2.2em;
             }
         }
 
@@ -1959,10 +3275,32 @@
     <div class="floating-shape shape2"></div>
     <div class="floating-shape shape3"></div>
 
+    <!-- Chatbot Toggle Button -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+            <span class="chatbot-close" onclick="toggleChatbot()">×</span>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot">
+                👋 Hi! I'm Saidur's AI assistant. Ask me anything!
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#home" class="logo"><del>SR</del></a>
+            <a href="#home" class="logo">SR</a>
             <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars"></i>
             </div>
@@ -1973,6 +3311,8 @@
                 <li><a href="#timeline"><i class="fas fa-graduation-cap"></i> Journey</a></li>
                 <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
                 <li><a href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
+                <li><a href="#certificates"><i class="fas fa-certificate"></i> Certificates</a></li>
+                <li><a href="#blog"><i class="fas fa-book"></i> Blog</a></li>
                 <li><a href="#quotes"><i class="fas fa-quote-left"></i> Philosophy</a></li>
                 <li><a href="#goals"><i class="fas fa-bullseye"></i> Goals</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
@@ -2008,11 +3348,12 @@
                 </div>
                 
                 <div class="tagline">
-                    "Assalamualaikum & Welcome to My Profile!"
+                    "Assalamualaikum & Welcome to My Portfolio!"
                 </div>
                 
                 <div class="cta-buttons">
                     <a href="#about" class="cta-btn"><i class="fas fa-rocket"></i> Explore Journey</a>
+                    <a href="#" class="cta-btn" onclick="openCV(event)"><i class="fas fa-file-pdf"></i> View CV</a>
                     <a href="#contact" class="cta-btn"><i class="fas fa-paper-plane"></i> Connect</a>
                     <a href="#" class="cta-btn" onclick="openLoveModal(event)"><i class="fas fa-heart"></i> Secret</a>
                 </div>
@@ -2037,7 +3378,7 @@
                         <i class="fas fa-birthday-cake"></i>
                         <div class="info-content">
                             <strong>Born:</strong>
-                            <span>January 01, 2009 (17 years young)<br><p class="formula">Birth Certificate 🙂</p></span>
+                            <span>January 01, 2009 (17 years young)</span>
                         </div>
                     </div>
                     <div class="info-card">
@@ -2065,7 +3406,7 @@
                         <i class="fas fa-phone-alt"></i>
                         <div class="info-content">
                             <strong>Phone:</strong>
-                            <span>01770157540</span>
+                            <span>01770157540 (IMO & WhatsApp)</span>
                         </div>
                     </div>
                     <div class="info-card">
@@ -2253,7 +3594,7 @@
                             <p>💡 Problem-solving mindset</p>
                             <p>✨ User experience focus</p>
                             <p>🌈 Color theory mastery</p>
-                            <p><b><i>I'm an Overthinker 😅</i></b></p>
+                            <p><b><i>I'm an Overthinker😅</i></b></p>
                         </div>
                     </div>
                 </div>
@@ -2354,6 +3695,22 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">News Website</h3>
+                        <p class="project-desc">A modern news portal built with HTML, CSS, and JavaScript. Features responsive design, dynamic content loading, and clean user interface.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                        <a href="https://saidursono.github.io/News/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> View Live</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
                         <i class="fas fa-video"></i>
                     </div>
                     <div class="project-content">
@@ -2370,22 +3727,6 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Web Development</h3>
-                        <p class="project-desc">Creating responsive, modern websites with HTML, CSS, and JavaScript. Focus on user experience and clean design.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Responsive</span>
-                        </div>
-                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> View Projects</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
                         <i class="fas fa-palette"></i>
                     </div>
                     <div class="project-content">
@@ -2397,6 +3738,102 @@
                             <span class="tag">Creative</span>
                         </div>
                         <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> View Designs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+        <div class="container">
+            <h2 class="section-title">Certificates & Achievements</h2>
+            
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-award"></i></div>
+                    <h3>Golden A+ Achievement</h3>
+                    <p><strong>From:</strong> Shikho (Online Learning Platform)</p>
+                    <p><strong>Year:</strong> 2025</p>
+                    <p>Achieved Golden A+ for outstanding performance in SSC preparation course.</p>
+                    <!-- Replace # with your actual certificate URL -->
+                    <a href="#" target="_blank" class="project-link" style="margin-top: 20px;"><i class="fas fa-certificate"></i> View Certificate</a>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>SSC Excellence</h3>
+                    <p><strong>From:</strong> Jashore Board</p>
+                    <p><strong>Year:</strong> 2025</p>
+                    <p>Secured GPA 5.00 in SSC examination from Science Group.</p>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-icon"><i class="fas fa-medal"></i></div>
+                    <h3>More Coming Soon</h3>
+                    <p><strong>Status:</strong> In Progress</p>
+                    <p><strong>Year:</strong> 2026+</p>
+                    <p>Currently working on more certifications in web development and design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog/Study Tips Section -->
+    <section id="blog">
+        <div class="container">
+            <h2 class="section-title">Study Tips & Learning</h2>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-header">
+                        <h3>How to Score Golden A+ in SSC</h3>
+                        <p class="blog-date"><i class="fas fa-calendar"></i> January 2026</p>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-excerpt">
+                            My proven strategy for achieving GPA 5.00: Consistent study routine, practice previous years' questions, focus on weak subjects early, and maintain a healthy balance between study and rest.
+                        </p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-header">
+                        <h3>Best Study Techniques for Science Students</h3>
+                        <p class="blog-date"><i class="fas fa-calendar"></i> December 2025</p>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-excerpt">
+                            Effective methods for mastering Physics, Chemistry, and Biology: Visual learning with diagrams, creating formula sheets, group study sessions, and practical application of concepts through real-world examples.
+                        </p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-header">
+                        <h3>Time Management Tips for SSC Students</h3>
+                        <p class="blog-date"><i class="fas fa-calendar"></i> November 2025</p>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-excerpt">
+                            Balance your SSC preparation with personal development: Create a realistic timetable, prioritize difficult subjects, take regular breaks, use the Pomodoro technique, and don't forget self-care.
+                        </p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-header">
+                        <h3>Learning Web Development While Studying</h3>
+                        <p class="blog-date"><i class="fas fa-calendar"></i> October 2025</p>
+                    </div>
+                    <div class="blog-content">
+                        <p class="blog-excerpt">
+                            How I manage academic studies and skill development: Dedicate 1-2 hours daily for coding, use weekends for projects, follow online tutorials, build small projects, and stay consistent.
+                        </p>
+                        <a href="#" class="read-more">Read More →</a>
                     </div>
                 </div>
             </div>
@@ -2510,11 +3947,11 @@
                 </a>
                 
                 <a href="tel:01770157540" class="contact-item">
-                    <i class="fas fa-phone-alt"></i> 01770157540
+                    <i class="fas fa-phone-alt"></i> 01770157540 (IMO & WhatsApp)
                 </a>
             </div>
 
-            <!-- Contact Form -->
+            <!-- Contact Form with EmailJS -->
             <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <label for="name"><i class="fas fa-user"></i> Your Name</label>
@@ -2528,7 +3965,7 @@
                     <label for="message"><i class="fas fa-comment"></i> Your Message</label>
                     <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="submit-btn" id="submitBtn">
                     <i class="fas fa-paper-plane"></i> Send Message
                 </button>
                 <div class="form-message" id="formMessage"></div>
@@ -2560,6 +3997,745 @@
     <div class="scroll-top" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </div>
+<!-- CV Modal -->
+<!-- CV Modal Button -->
+<button onclick="openCV()" class="cv-open-btn">
+    <i class="fas fa-file-alt"></i> View My CV
+</button>
+
+<!-- CV Modal -->
+<div class="cv-modal" id="cvModal">
+    <div class="cv-content">
+        <span class="close-cv" onclick="closeCV()">&times;</span>
+        
+        <!-- Header Section -->
+        <div class="cv-header">
+            <div class="header-pattern"></div>
+            <h1 class="cv-name">MD. SAIDUR RAHAMAN</h1>
+            <h2 class="cv-name-bn">মোঃ সাইদুর রহমান</h2>
+            <p class="cv-designation">Science Student | Future Developer | Creative Designer</p>
+            
+            <div class="contact-bar">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>issaidur999@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>01770157540</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>01763254412</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Information Table -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-user-circle"></i> Personal Information
+            </h3>
+            
+            <table class="info-table">
+                <tr>
+                    <td class="label"><i class="fas fa-id-badge"></i> Student ID</td>
+                    <td class="value">20251357</td>
+                    <td class="label"><i class="fas fa-calendar"></i> Date of Birth</td>
+                    <td class="value">01-Jan-2009</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-tint"></i> Blood Group</td>
+                    <td class="value">A+</td>
+                    <td class="label"><i class="fas fa-flag"></i> Nationality</td>
+                    <td class="value">Bangladeshi</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-mosque"></i> Religion</td>
+                    <td class="value">Islam</td>
+                    <td class="label"><i class="fas fa-users"></i> Quota</td>
+                    <td class="value">Education</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Address Information -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-map-marker-alt"></i> Address Information
+            </h3>
+            
+            <table class="info-table">
+                <tr>
+                    <td class="label"><i class="fas fa-home"></i> Village/Mohalla</td>
+                    <td class="value">Charpara</td>
+                    <td class="label"><i class="fas fa-envelope-open"></i> Post Office</td>
+                    <td class="value">Insafnagar</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-map"></i> Upazilla/Thana</td>
+                    <td class="value">Daulatpur</td>
+                    <td class="label"><i class="fas fa-city"></i> District</td>
+                    <td class="value">Kushtia</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Family Information -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-users"></i> Family Information
+            </h3>
+            
+            <table class="info-table">
+                <tr>
+                    <td class="label"><i class="fas fa-male"></i> Father's Name</td>
+                    <td class="value" colspan="3">MD. MEHEDHE HASAN RANA</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-id-card"></i> Father's NID</td>
+                    <td class="value">1921496632</td>
+                    <td class="label"><i class="fas fa-phone"></i> Contact</td>
+                    <td class="value">01763254412</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-female"></i> Mother's Name</td>
+                    <td class="value" colspan="3">MST. EASMIN KHATUN</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-id-card"></i> Mother's NID</td>
+                    <td class="value">4171450127</td>
+                    <td class="label"><i class="fas fa-money-bill"></i> Yearly Income</td>
+                    <td class="value">100,000 BDT</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- HSC Information -->
+        <div class="cv-section education-section">
+            <h3 class="section-title">
+                <i class="fas fa-graduation-cap"></i> Higher Secondary Certificate (HSC) - Ongoing
+            </h3>
+            
+            <table class="info-table">
+                <tr>
+                    <td class="label"><i class="fas fa-university"></i> Institution</td>
+                    <td class="value" colspan="3">Shahid Abul Hasnat Muhammad Kamaruzzaman Govt. Degree College, Rajshahi</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-id-badge"></i> EIIN No</td>
+                    <td class="value">126484</td>
+                    <td class="label"><i class="fas fa-calendar-alt"></i> Session</td>
+                    <td class="value">2025-2026</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-hashtag"></i> Class Roll</td>
+                    <td class="value">20251357</td>
+                    <td class="label"><i class="fas fa-calendar-check"></i> Admission Date</td>
+                    <td class="value">14-Sep-2025</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-globe"></i> Website</td>
+                    <td class="value">www.skcr.edu.bd</td>
+                    <td class="label"><i class="fas fa-envelope"></i> Email</td>
+                    <td class="value">skcr2018@gmail.com</td>
+                </tr>
+            </table>
+
+            <h4 class="sub-title"><i class="fas fa-book"></i> Subject List</h4>
+            
+            <table class="subject-table">
+                <thead>
+                    <tr>
+                        <th>Serial</th>
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bangla</td>
+                        <td>101-102</td>
+                        <td><span class="badge compulsory">Compulsory</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>English</td>
+                        <td>107-108</td>
+                        <td><span class="badge compulsory">Compulsory</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>ICT</td>
+                        <td>275</td>
+                        <td><span class="badge compulsory">Compulsory</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Physics</td>
+                        <td>174-175</td>
+                        <td><span class="badge group">Group Subject</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Chemistry</td>
+                        <td>176-177</td>
+                        <td><span class="badge group">Group Subject</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Higher Mathematics</td>
+                        <td>265-266</td>
+                        <td><span class="badge group">Group Subject</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Biology</td>
+                        <td>178-179</td>
+                        <td><span class="badge optional">Optional</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SSC Results -->
+        <div class="cv-section education-section result-section">
+            <h3 class="section-title">
+                <i class="fas fa-certificate"></i> Secondary School Certificate (SSC) - 2025
+            </h3>
+            
+            <div class="result-badge">
+                <i class="fas fa-trophy"></i>
+                <span>GPA 5.00</span>
+                <p>Golden A+</p>
+            </div>
+
+            <table class="info-table">
+                <tr>
+                    <td class="label"><i class="fas fa-school"></i> Institution</td>
+                    <td class="value" colspan="3">Insaf Nagar Secondary School (117514), Kushtia</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-id-badge"></i> Roll No</td>
+                    <td class="value">622569</td>
+                    <td class="label"><i class="fas fa-hashtag"></i> Registration No</td>
+                    <td class="value">2213508939</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-building"></i> Board</td>
+                    <td class="value">Jashore</td>
+                    <td class="label"><i class="fas fa-calendar"></i> Session</td>
+                    <td class="value">2023-2024</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-users"></i> Group</td>
+                    <td class="value">Science</td>
+                    <td class="label"><i class="fas fa-check-circle"></i> Type</td>
+                    <td class="value">Regular</td>
+                </tr>
+                <tr>
+                    <td class="label"><i class="fas fa-graduation-cap"></i> Passing Year</td>
+                    <td class="value">2025</td>
+                    <td class="label"><i class="fas fa-map-marker"></i> Center</td>
+                    <td class="value">J. M. G. - 438</td>
+                </tr>
+            </table>
+
+            <h4 class="sub-title"><i class="fas fa-chart-bar"></i> Subject-wise Marks & Grades</h4>
+            
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Serial</th>
+                        <th>Subject Name</th>
+                        <th>Marks Obtained</th>
+                        <th>Total Marks</th>
+                        <th>Grade</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bangla</td>
+                        <td>162</td>
+                        <td>200</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>English</td>
+                        <td>169</td>
+                        <td>200</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Mathematics</td>
+                        <td>95</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Bangladesh & Global Studies</td>
+                        <td>94</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr class="perfect-score">
+                        <td>5</td>
+                        <td>Islam & Moral Education</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td><span class="grade-badge perfect">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Physics</td>
+                        <td>94</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Chemistry</td>
+                        <td>98</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Biology</td>
+                        <td>93</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Information & Communication Technology</td>
+                        <td>47</td>
+                        <td>50</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Higher Mathematics</td>
+                        <td>91</td>
+                        <td>100</td>
+                        <td><span class="grade-badge">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td colspan="2"><strong>Total</strong></td>
+                        <td><strong>1043</strong></td>
+                        <td><strong>1150</strong></td>
+                        <td colspan="2"><strong>GPA: 5.00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h4 class="sub-title"><i class="fas fa-running"></i> Continuous Assessment</h4>
+            
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th>Serial</th>
+                        <th>Subject Name</th>
+                        <th>Marks Obtained</th>
+                        <th>Total Marks</th>
+                        <th>Grade</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="perfect-score">
+                        <td>1</td>
+                        <td>Physical Education, Health & Sports</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td><span class="grade-badge perfect">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                    <tr class="perfect-score">
+                        <td>2</td>
+                        <td>Career Education</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td><span class="grade-badge perfect">A+</span></td>
+                        <td>5.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-code"></i> Technical Skills
+            </h3>
+            
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Skills</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-laptop-code"></i> Web Development</td>
+                        <td>HTML5, CSS3, JavaScript (ES6+), Responsive Design</td>
+                        <td><span class="skill-level advanced">Advanced</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-video"></i> Video Editing</td>
+                        <td>Alight Motion, CapCut, Advanced Effects</td>
+                        <td><span class="skill-level expert">Expert</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-paint-brush"></i> Creative Design</td>
+                        <td>UI/UX Concepts, Visual Design, Color Theory</td>
+                        <td><span class="skill-level advanced">Advanced</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-tools"></i> Development Tools</td>
+                        <td>Git, VS Code, Browser DevTools</td>
+                        <td><span class="skill-level intermediate">Intermediate</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-calculator"></i> Mathematics</td>
+                        <td>Advanced Math, Higher Math, Problem Solving</td>
+                        <td><span class="skill-level expert">Expert</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-flask"></i> Science</td>
+                        <td>Physics, Chemistry, Biology, Research</td>
+                        <td><span class="skill-level advanced">Advanced</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Projects -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-project-diagram"></i> Projects
+            </h3>
+            
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Technologies</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>News Website</strong></td>
+                        <td>HTML5, CSS3, JavaScript</td>
+                        <td>Fully responsive news portal with dynamic content loading</td>
+                        <td><a href="https://saidursono.github.io/News/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> View</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Video Editing Portfolio</strong></td>
+                        <td>Alight Motion, CapCut</td>
+                        <td>Professional video editing with advanced effects</td>
+                        <td><span class="coming-soon">Coming Soon</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Personal Portfolio</strong></td>
+                        <td>HTML, CSS, JavaScript</td>
+                        <td>Interactive portfolio with modern design</td>
+                        <td><span class="coming-soon">Coming Soon</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Achievements -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-trophy"></i> Achievements & Certifications
+            </h3>
+            
+            <table class="achievements-table">
+                <thead>
+                    <tr>
+                        <th>Achievement</th>
+                        <th>Details</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-medal gold"></i> Golden A+ Achievement</td>
+                        <td>SSC Examination, Jashore Board (GPA 5.00)</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-award"></i> Golden A+ Recognition</td>
+                        <td>Shikho Online Learning Platform</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-star gold"></i> Perfect Score</td>
+                        <td>Islam & Moral Education (100/100 Marks)</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-certificate"></i> Excellence in All Subjects</td>
+                        <td>A+ Grade in all 10 subjects plus continuous assessment</td>
+                        <td>2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Languages -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-language"></i> Languages
+            </h3>
+            
+            <table class="language-table">
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Proficiency</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-flag"></i> Bengali</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </td>
+                        <td><span class="lang-badge native">Native</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-globe"></i> English</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </td>
+                        <td><span class="lang-badge proficient">Proficient</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Career Objectives -->
+        <div class="cv-section">
+            <h3 class="section-title">
+                <i class="fas fa-bullseye"></i> Career Objectives
+            </h3>
+            
+            <div class="objective-box">
+                <div class="objective-item">
+                    <h4><i class="fas fa-clock"></i> Short-term Goals</h4>
+                    <p>To excel in HSC examination with outstanding results and gain admission to premier engineering institutions like BUET or Dhaka University in Computer Science or related technology fields.</p>
+                </div>
+                <div class="objective-item">
+                    <h4><i class="fas fa-rocket"></i> Long-term Vision</h4>
+                    <p>To become a skilled software developer and technology innovator who creates solutions that make people's lives easier and more efficient. Aspire to contribute significantly to Bangladesh's technological advancement and digital transformation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="cv-footer">
+            <div class="declaration">
+                <p><strong>Declaration:</strong> I hereby declare that all the information mentioned above is true and correct to the best of my knowledge.</p>
+            </div>
+            <div class="signature-section">
+                <div class="signature-box">
+                    <div class="signature-line"></div>
+                    <p><strong>MD. SAIDUR RAHAMAN</strong></p>
+                    <p class="date">Date: <span id="currentDate"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="cv-section">
+            <h3><i class="fas fa-star"></i> Personal Strengths</h3>
+            <div class="strengths-grid">
+                <span class="strength-tag"><i class="fas fa-brain"></i> Fast Learner</span>
+                <span class="strength-tag"><i class="fas fa-lightbulb"></i> Creative Problem Solver</span>
+                <span class="strength-tag"><i class="fas fa-clock"></i> Excellent Time Management</span>
+                <span class="strength-tag"><i class="fas fa-bullseye"></i> Goal-Oriented</span>
+                <span class="strength-tag"><i class="fas fa-heartbeat"></i> Strong Work Ethic</span>
+                <span class="strength-tag"><i class="fas fa-chart-line"></i> Continuous Improvement</span>
+                <span class="strength-tag"><i class="fas fa-users"></i> Team Player</span>
+                <span class="strength-tag"><i class="fas fa-comment"></i> Good Communicator</span>
+                <span class="strength-tag"><i class="fas fa-puzzle-piece"></i> Analytical Thinking</span>
+                <span class="strength-tag"><i class="fas fa-rocket"></i> Self-Motivated</span>
+            </div>
+        </div>
+
+        <div class="cv-section">
+            <h3><i class="fas fa-bullseye"></i> Career Objectives</h3>
+            <p class="objective-text">
+                <strong>Short-term Goals:</strong> To excel in HSC examination with outstanding results and gain 
+                admission to premier engineering institutions like BUET (Bangladesh University of Engineering and 
+                Technology) or Dhaka University in Computer Science or related technology fields.
+                <br><br>
+                <strong>Long-term Vision:</strong> To become a skilled software developer and technology innovator 
+                who creates solutions that make people's lives easier and more efficient. Aspire to contribute 
+                significantly to Bangladesh's technological advancement and digital transformation while establishing 
+                a reputation for excellence in the global tech industry. Committed to bringing pride to Bangladesh 
+                through innovation and technical excellence.
+            </p>
+        </div>
+
+        <div class="cv-section">
+            <h3><i class="fas fa-heart"></i> Interests & Hobbies</h3>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <i class="fas fa-code"></i>
+                    <strong>Coding</strong>
+                    <p>Passionate about learning new programming languages and building web applications</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-video"></i>
+                    <strong>Video Editing</strong>
+                    <p>Creating engaging visual content with creative effects and storytelling</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-book-reader"></i>
+                    <strong>Self-Learning</strong>
+                    <p>Continuously exploring new technologies and improving technical skills</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Problem Solving</strong>
+                    <p>Enjoying mathematical and logical challenges that enhance analytical thinking</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-section">
+            <h3><i class="fas fa-language"></i> Languages</h3>
+            <div class="language-grid">
+                <div class="language-item">
+                    <i class="fas fa-flag"></i>
+                    <strong>Bengali</strong>
+                    <div class="lang-bar">
+                        <div class="lang-progress" style="width: 100%"></div>
+                    </div>
+                    <span class="lang-level">Native</span>
+                </div>
+                <div class="language-item">
+                    <i class="fas fa-globe"></i>
+                    <strong>English</strong>
+                    <div class="lang-bar">
+                        <div class="lang-progress" style="width: 85%"></div>
+                    </div>
+                    <span class="lang-level">Proficient</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-footer">
+            <p><i class="fas fa-quote-left"></i> Dedicated to excellence, driven by passion, committed to making a difference <i class="fas fa-quote-right"></i></p>
+            <p class="declaration">I hereby declare that all the information mentioned above is true and correct to the best of my knowledge.</p>
+            <div class="signature-section">
+                <div class="signature-line">
+                    <p>____________________</p>
+                    <p><strong>MD. SAIDUR RAHAMAN</strong></p>
+                    <p>Date: <script>document.write(new Date().toLocaleDateString())</script></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Projects -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-project-diagram"></i> Projects & Achievements</h3>
+            
+            <p><strong>News Website</strong> - HTML, CSS, JavaScript</p>
+            <p>A responsive news portal with dynamic content loading and modern design.</p>
+            <p>Link: <a href="https://saidursono.github.io/News/" target="_blank">saidursono.github.io/News</a></p>
+            
+            <p style="margin-top: 15px;"><strong>Video Editing Portfolio</strong> - Alight Motion, CapCut</p>
+            <p>Professional video editing work showcasing creative transitions and effects.</p>
+            
+            <p style="margin-top: 15px;"><strong>Shikho Golden A+ Certificate</strong> - Achieved top marks in online learning projects.</p>
+        </div>
+
+        <!-- Certifications -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-certificate"></i> Certifications</h3>
+            <ul style="line-height:1.6; color:#444;">
+                <li>Golden A+ Achievement - Shikho Online Learning Platform (2025)</li>
+                <li>SSC Science Group Excellence - Jashore Board (2025)</li>
+            </ul>
+        </div>
+
+        <!-- Personal Strengths -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-star"></i> Personal Strengths</h3>
+            <ul style="line-height:1.6; color:#444;">
+                <li>Fast learner with strong self-teaching abilities</li>
+                <li>Creative problem solver with analytical mindset</li>
+                <li>Excellent time management and goal-oriented approach</li>
+                <li>Strong work ethic and dedication to continuous improvement</li>
+            </ul>
+        </div>
+
+        <!-- Career Objectives -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-bullseye"></i> Career Objectives</h3>
+            <p style="line-height:1.6; color:#444;">
+                To pursue higher education at BUET or Dhaka University in technology and engineering. 
+                My long-term goal is to become a skilled developer and innovator who simplifies people's lives through technology while making Bangladesh proud.
+            </p>
+        </div>
+
+        <!-- Languages -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-language"></i> Languages</h3>
+            <ul style="line-height:1.6; color:#444;">
+                <li><strong>Bengali:</strong> Native</li>
+                <li><strong>English:</strong> Proficient</li>
+            </ul>
+        </div>
+
+        <!-- History / Timeline (New) -->
+        <div class="cv-section">
+            <h3 style="color:#1e3a8a;"><i class="fas fa-history"></i> Academic & Achievement Timeline</h3>
+            <ul style="line-height:1.6; color:#444;">
+                <li><strong>2025:</strong> SSC - GPA 5.00 (Golden A+) | Jashore Board</li>
+                <li><strong>2025:</strong> Completed Shikho Online Learning Projects with Golden A+ recognition</li>
+                <li><strong>2025-2026:</strong> HSC - Ongoing | Science Group | Developing Web & Video Skills</li>
+                <li><strong>2023-2024:</strong> Participated in school science fairs and coding competitions</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
     <!-- Secret Love Modal -->
     <div class="love-modal" id="loveModal">
@@ -2585,26 +4761,67 @@
             <div class="floating-hearts" id="floatingHearts"></div>
 
             <!-- Main Love Title -->
-<div type="formula"" style="background-color;#FFCE5D"> <p type="formula"><i><b><del><h1>FOR SINTHIA 😊</h1></del></b></i></p></div>
-<!-- I Love You সেকশন -->
-<div style="margin: 50px 0; padding: 30px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px);">
-    <p style="font-size: 1.5em; color: #fff; line-height: 2;">
-        Tui Kutta 🙃
-    </p>
-</div>
+            <h1 class="love-title">I Love You 💌</h1>
 
-<!-- Love You So Much সেকশন -->
-<div style="margin: 50px 0; padding: 30px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px);">
-    <p style="font-size: 1.5em; color: #fff; line-height: 2;">
-        🤣 ~
-
-    </p>
-</div>
+            <!-- Love Message Card -->
+            <div class="love-message-card">
+                <h3>To My Special One ✨</h3>
+                <div class="hearts-container">💖 💝 💗 💕 💓</div>
+                <p>
+                    Every moment with you feels like magic. ✨
+                </p>
+                <p>
+                    You make my world brighter, my days happier, and my heart fuller. 💖
+                </p>
+                <p>
+                    Thank you for being the most amazing person in my life. 🌟
+                </p>
+                <p>
+                    No words can express how much you mean to me, but these three words say it all:
+                </p>
+                <h3 style="font-size: 5em; margin: 40px 0; color: #ff1493;">I LOVE YOU</h3>
+                <p>
+                    Forever and always... 💕
+                </p>
             </div>
         </div>
     </div>
 
     <script>
+        /* 
+        ===========================================
+        EMAIL CONFIGURATION - IMPORTANT!
+        ===========================================
+        To make the contact form work and send emails to issaidur999@gmail.com:
+        
+        1. Go to https://www.emailjs.com/
+        2. Create a FREE account
+        3. Add Gmail service and connect issaidur999@gmail.com
+        4. Create an email template
+        5. Get your:
+           - Public Key
+           - Service ID  
+           - Template ID
+        6. Replace the values below
+        
+        Or use this alternative method without EmailJS:
+        - Use Formspree: https://formspree.io/
+        - Or Google Forms backend
+        ===========================================
+        */
+
+        // EmailJS Configuration
+        const EMAILJS_CONFIG = {
+            publicKey: '4AX3Y75k3McGT9aPD', // Get from EmailJS dashboard
+            serviceID: 'service_ta2wjbh', // Your Gmail service ID
+            templateID: 'template_mo6j6kf' // Your template ID
+        };
+
+        // Initialize EmailJS
+        (function(){
+            // emailjs.init(EMAILJS_CONFIG.publicKey);
+        })();
+
         // ===== THEME TOGGLE =====
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
@@ -2800,33 +5017,264 @@
             skillObserver.observe(skillsSection);
         }
 
-        // ===== CONTACT FORM HANDLER =====
-        function handleSubmit(event) {
+        // ===== CONTACT FORM HANDLER WITH EMAILJS =====
+        async function handleSubmit(event) {
             event.preventDefault();
             
+            const submitBtn = document.getElementById('submitBtn');
             const formMessage = document.getElementById('formMessage');
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Simple form validation
-            if (name && email && message) {
-                formMessage.textContent = '✅ Message sent successfully! But This Future Coming soon! .';
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            try {
+                // Simple mailto fallback (works without EmailJS setup)
+                // To enable EmailJS, uncomment the EmailJS code below and comment out this section
+                
+                const mailtoLink = `mailto:issaidur999@gmail.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(email)}`;
+                window.location.href = mailtoLink;
+                
+                formMessage.textContent = '✅ Opening your email client... Please send the email to complete.';
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
                 
                 // Reset form
                 document.getElementById('contactForm').reset();
                 
+                /* 
+                ==========================================
+                EMAILJS METHOD (Uncomment to use after setup)
+                ==========================================
+                
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    to_email: 'issaidur999@gmail.com'
+                };
+
+                await emailjs.send(
+                    EMAILJS_CONFIG.serviceID,
+                    EMAILJS_CONFIG.templateID,
+                    templateParams
+                );
+
+                formMessage.textContent = '✅ Message sent successfully! I will get back to you soon.';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                
+                document.getElementById('contactForm').reset();
+                
+                ==========================================
+                */
+                
+            } catch (error) {
+                console.error('Error:', error);
+                formMessage.textContent = '❌ Failed to send message. Please try again or email directly.';
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                
                 // Hide message after 5 seconds
                 setTimeout(() => {
                     formMessage.style.display = 'none';
                 }, 5000);
-            } else {
-                formMessage.textContent = '❌ Please fill in all fields.';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
             }
+        }
+
+        // ===== CV MODAL FUNCTIONS =====
+// Open CV Modal
+function openCV() {
+    document.getElementById('cvModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Set current date
+    const today = new Date();
+    const dateString = today.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    });
+    document.getElementById('currentDate').textContent = dateString;
+}
+
+// Close CV Modal
+function closeCV() {
+    document.getElementById('cvModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('cvModal');
+    if (event.target === modal) {
+        closeCV();
+    }
+}
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('cvModal');
+        if (modal.style.display === 'block') {
+            closeCV();
+        }
+    }
+});
+
+// Animate progress bars on scroll
+function animateProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-fill');
+    
+    progressBars.forEach(bar => {
+        const rect = bar.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+        
+        if (isVisible) {
+            bar.style.width = bar.style.width;
+        }
+    });
+}
+
+// Add scroll animation for tables
+function animateOnScroll() {
+    const tables = document.querySelectorAll('.info-table, .subject-table, .marks-table, .skills-table, .projects-table, .achievements-table, .language-table');
+    
+    tables.forEach(table => {
+        const rect = table.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+        
+        if (isVisible) {
+            table.style.opacity = '1';
+            table.style.transform = 'translateY(0)';
+        }
+    });
+}
+
+// Initialize animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial setup for animations
+    const tables = document.querySelectorAll('.info-table, .subject-table, .marks-table, .skills-table, .projects-table, .achievements-table, .language-table');
+    tables.forEach(table => {
+        table.style.opacity = '0';
+        table.style.transform = 'translateY(20px)';
+        table.style.transition = 'all 0.5s ease';
+    });
+});
+
+// Listen for scroll events inside modal
+const cvModal = document.getElementById('cvModal');
+if (cvModal) {
+    cvModal.addEventListener('scroll', function() {
+        animateProgressBars();
+        animateOnScroll();
+    });
+}
+
+// Print CV function
+function printCV() {
+    window.print();
+}
+
+// Download CV as PDF (requires html2pdf library)
+function downloadCV() {
+    alert('Download functionality requires html2pdf.js library. Please add the library to enable this feature.');
+}
+        
+
+        // ===== CHATBOT FUNCTIONS =====
+        function toggleChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const messagesContainer = document.getElementById('chatMessages');
+            const userMessage = input.value.trim();
+            
+            if (!userMessage) return;
+            
+            // Add user message
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chat-message user';
+            userMsgDiv.textContent = userMessage;
+            messagesContainer.appendChild(userMsgDiv);
+            
+            // Clear input
+            input.value = '';
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Get bot response
+            setTimeout(() => {
+                const botResponse = getBotResponse(userMessage.toLowerCase());
+                const botMsgDiv = document.createElement('div');
+                botMsgDiv.className = 'chat-message bot';
+                botMsgDiv.textContent = botResponse;
+                messagesContainer.appendChild(botMsgDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 500);
+        }
+
+        function getBotResponse(message) {
+            // Auto-response chatbot
+            if (message.includes('who') && (message.includes('saidur') || message.includes('you'))) {
+                return "I'm Saidur Rahaman, a 17-year-old Science student from Bangladesh. I'm passionate about web development, video editing, and creative design. Currently studying HSC and aiming for BUET or Dhaka University!";
+            }
+            
+            if (message.includes('skill')) {
+                return "My skills include HTML/CSS, JavaScript, Responsive Design, Video Editing (Alight Motion, CapCut), Creative Thinking, and Problem Solving. I'm constantly learning and improving!";
+            }
+            
+            if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+                return "You can reach me at:\n📧 Email: issaidur999@gmail.com\n📱 Phone: 01770157540 (IMO & WhatsApp)\nOr use the contact form on this page!";
+            }
+            
+            if (message.includes('dream') || message.includes('goal') || message.includes('future')) {
+                return "My dream is to get admitted to BUET or Dhaka University, become a skilled developer, and create technology that makes people's lives easier. I want to bring pride to Bangladesh!";
+            }
+            
+            if (message.includes('education') || message.includes('study') || message.includes('school')) {
+                return "I completed SSC in 2025 with GPA 5.00 (Golden A+) from Science Group. Currently studying HSC at Shahid Abul Hasnat Muhammad Kamaruzzaman Govt. Degree College, Rajshahi.";
+            }
+            
+            if (message.includes('project')) {
+                return "I've worked on several projects including a News Website (https://saidursono.github.io/News/), video editing portfolios, and creative designs. Check out my Projects section for more!";
+            }
+            
+            if (message.includes('certificate') || message.includes('achievement')) {
+                return "I earned Golden A+ from Shikho online platform and secured GPA 5.00 in SSC. Currently working on more certifications in web development!";
+            }
+            
+            if (message.includes('hi') || message.includes('hello') || message.includes('hey')) {
+                return "Hello! 👋 How can I help you today? Ask me about Saidur's skills, projects, education, or anything else!";
+            }
+            
+            if (message.includes('thank')) {
+                return "You're welcome! 😊 Feel free to ask anything else!";
+            }
+            
+            if (message.includes('help')) {
+                return "I can answer questions about:\n• Who is Saidur\n• Skills & expertise\n• Education & achievements\n• Projects & work\n• Contact information\n• Future goals & dreams\n\nJust ask away!";
+            }
+            
+            // Default response
+            return "That's an interesting question! You can explore more about Saidur through the portfolio sections, or ask me about his skills, projects, education, contact info, or future goals. How can I help you?";
         }
 
         // ===== SECRET LOVE MODAL FUNCTIONS =====
@@ -2837,6 +5285,7 @@
             document.getElementById('loveContent').classList.remove('active');
             document.getElementById('lovePassword').value = '';
             document.getElementById('errorMsg').textContent = '';
+            document.body.style.overflow = 'hidden';
             
             // Start rose petals
             createRosePetals();
@@ -2844,13 +5293,14 @@
 
         function closeLoveModal() {
             document.getElementById('loveModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
             // Remove all petals and sparkles
             document.querySelectorAll('.rose-petal, .sparkle').forEach(el => el.remove());
         }
 
         function checkPassword() {
             const password = document.getElementById('lovePassword').value;
-            const correctPassword = 'formybesty';
+            const correctPassword = 'saidur&sinthia';
             
             if (password === correctPassword) {
                 document.getElementById('passwordScreen').style.display = 'none';
@@ -2894,7 +5344,7 @@
             const heartsContainer = document.getElementById('floatingHearts');
             const hearts = ['❤️', '💖', '💕', '💗', '💝', '💘'];
             
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.className = 'heart';
@@ -2920,7 +5370,7 @@
             setTimeout(() => sparkle.remove(), 3000);
         }
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         document.getElementById('loveModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeLoveModal();
@@ -2950,7 +5400,7 @@
         console.log('%c🚀 Welcome to Saidur\'s Ultimate Portfolio!', 'color: #6B46C1; font-size: 28px; font-weight: bold;');
         console.log('%c💻 Built with passion, dedication & advanced animations', 'color: #00D9FF; font-size: 18px;');
         console.log('%c🔒 Psst... there\'s a secret love page. Can you unlock it? 😉', 'color: #FF6B9D; font-size: 16px; font-style: italic;');
-        console.log('%c💡 Hint: The password is related to two special names...', 'color: #FFD700; font-size: 14px;');
+        console.log('%c💡 Password hint: Two special names connected with &', 'color: #FFD700; font-size: 14px;');
 
         // ===== SMOOTH SCROLL FOR NAVIGATION LINKS =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2987,16 +5437,35 @@
             });
         });
 
-        // ===== PREVENT RIGHT CLICK (OPTIONAL - FOR PROTECTION) =====
-        // Uncomment if you want to protect your content
-        /*
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        // ===== KEYBOARD SHORTCUTS =====
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            // Ctrl/Cmd + K to open chatbot
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
+                toggleChatbot();
+            }
+            
+            // ESC to close modals
+            if (e.key === 'Escape') {
+                closeLoveModal();
+                closeCV();
+                const chatWindow = document.getElementById('chatbotWindow');
+                if (chatWindow.classList.contains('active')) {
+                    toggleChatbot();
+                }
             }
         });
-        */
+
+        // ===== PREVENT CONSOLE SPAM =====
+        let lastLog = 0;
+        const originalConsoleLog = console.log;
+        console.log = function() {
+            const now = Date.now();
+            if (now - lastLog > 1000) {
+                originalConsoleLog.apply(console, arguments);
+                lastLog = now;
+            }
+        };
     </script>
 </body>
 </html>
