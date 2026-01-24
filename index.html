@@ -3119,6 +3119,137 @@ footer .heart {
 }
 
 /* ========== SECRET LOVE MODAL ========== */
+
+.love-message-card {
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+    border-radius: 25px;
+    padding: 50px 40px;
+    box-shadow: 0 15px 50px rgba(255, 20, 147, 0.3);
+    max-width: 700px;
+    margin: 50px auto;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #ff69b4;
+}
+
+.love-message-card::before {
+    content: '❤️';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 150px;
+    opacity: 0.1;
+    transform: rotate(-15deg);
+}
+
+.love-message-card h3 {
+    color: #ff1493;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+    font-weight: bold;
+}
+
+.hearts-container {
+    text-align: center;
+    font-size: 3em;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.heart {
+    display: inline-block;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+.heart:nth-child(1) { animation-delay: 0s; }
+.heart:nth-child(2) { animation-delay: 0.2s; }
+.heart:nth-child(3) { animation-delay: 0.4s; }
+.heart:nth-child(4) { animation-delay: 0.6s; }
+.heart:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+.message-text {
+    color: #4a4a4a;
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin: 20px 0;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.message-text.romantic {
+    background: linear-gradient(to right, #ff69b4, #ff1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    font-size: 1.3em;
+}
+
+.big-love {
+    font-size: 4em;
+    margin: 50px 0;
+    text-align: center;
+    background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(255, 20, 147, 0.2);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
+    }
+}
+
+.forever-text {
+    color: #ff1493;
+    font-size: 1.4em;
+    text-align: center;
+    margin: 40px 0 30px 0;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.signature {
+    color: #ff69b4;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 600;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    border: 2px dashed #ff1493;
+}
+
+@media (max-width: 768px) {
+    .love-message-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .big-love {
+        font-size: 2.5em;
+    }
+    
+    .message-text {
+        font-size: 1em;
+    }
+}
 .love-modal {
     display: none;
     position: fixed;
@@ -5247,31 +5378,58 @@ footer .heart {
             <h1 class="love-title">I Love You 💌</h1>
 			<img src="https://i.ibb.co/mF5xCg3m/file-0000000061c471fa99868cdd03cdf9d1.png" height="50px" width="50px">
 
-            <!-- Love Message Card -->
-            <div class="love-message-card">
-                <h3>To My Special One ✨</h3>
-                <div class="hearts-container">💖 💝 💗 💕 💓</div>
-                <p>
-                    Every moment with you feels like magic. ✨
-                </p>
-                <p>
-                    You make my world brighter, my days happier, and my heart fuller. 💖
-                </p>
-                <p>
-                    Thank you for being the most amazing person in my life. 🌟
-                </p>
-                <p>
-                    No words can express how much you mean to me, but these three words say it all:
-                </p>
-                <h3 style="font-size: 5em; margin: 40px 0; color: #ff1493;">I LOVE YOU</h3>
-                <p>
-                    Forever and always... 💕
-                </p>
-					<p> sotti re kutta 😊</p>
-            </div>
-        </div>
+            
+<!-- Love Message Card -->
+<div class="love-message-card">
+    <h3>I Love You Sinthia 🤍 ✨</h3>
+    
+    <div class="hearts-container">
+        <span class="heart">💖</span>
+        <span class="heart">💝</span>
+        <span class="heart">💗</span>
+        <span class="heart">💕</span>
+        <span class="heart">💓</span>
     </div>
-
+    
+    <p class="message-text">
+        আমি কিভাবে বলবো বুঝতে পারছিনা রেএ অনেক অনেক ভালোবেসে ফেলেছি তোরে 😕
+    </p>
+    
+    <p class="message-text">
+        আমি বলবো না তুই চাদের মতো সুন্দর কিন্তু বলব চাদের চেয়ে কম কোন দিক দিয়ে 😊🤗
+    </p>
+    
+    <p class="message-text">
+       অনেক অনেক ভালোবাসি কুত্তা তোকে 😊
+    </p>
+    
+    <p class="message-text">
+        অনেক অনেক ভালো বাসি তোরে অনেক অনেক অনেক 🤍
+    </p>
+    
+    <p class="message-text">
+        জানিস তুই যখন কথা বলিস আমার সময়ের জ্ঞান থাকে না,  ঘড়ি তখন বৃথা 😣 <br>
+ এই ভাবে যদি কথা বলতে পারতাম সারাজীবন 😫
+    </p>
+    
+    <h2 class="big-love">I LOVE YOU SINTHIA</h2>
+    
+    <p class="message-text romantic">
+      আমি এমন ভাবে কখনই বলবোনা তোর চোখ গুলা না একদম হরিনের মতো,, কিন্তু কম কোন দিক দিয়ে 🤗
+    </p>
+    
+    <p class="message-text romantic">
+       আমি তোকে খুব ভালোবাসি  রে খুব খুব 🤗🥰
+    
+    <p class="forever-text">
+        চিরকালের জন্য... চিরদিনের জন্য... শুধু তোর জন্য... 💕
+    </p>
+    
+    <p class="signature">
+        সত্যি রে! 😊 তুই আমার সবকিছু।  এটা আমি বলছিনা,  কিন্তু সত্যিই তুই অনেক কিছু রে kutti 😊🤗 ❤️ <br> পৃথিবীতে কত মানুষ কত রকমের কিন্তু <br>তোরে দেখলে আলাদা একটা অনুভুতি কাজ করে 😊
+<br> [SAIDUR+SINTHIA] আজ বেঞ্চে না website a লিখে রাখলাম 🤗
+    </p>
+</div>
     <script>
         /* 
         ===========================================
